@@ -1,0 +1,84 @@
+{
+  "name": "translate-selection-es",
+  "displayName": "VSCode Translate Spanish",
+  "description": "Traduce el texto seleccionado al español usando un atajo de teclado (Shift+Alt+T / Shift+Alt+T)",
+  "version": "1.0.4",
+  "publisher": "YoSoyAnasPro",
+  "icon": "./src/logo.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "translateSelection.toSpanish",
+        "title": "Traducir selección al Español"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "translateSelection.toSpanish",
+        "key": "shift+alt+t",
+        "mac": "shift+alt+t",
+        "when": "editorHasSelection"
+      }
+    ],
+    "configuration": {
+      "title": "Traducir al Español",
+      "properties": {
+        "translateSelection.replaceInPlace": {
+          "type": "boolean",
+          "default": true,
+          "description": "Si está activado, reemplaza el texto seleccionado por la traducción. Si está desactivado, muestra la traducción en un mensaje emergente."
+        },
+        "translateSelection.sourceLanguage": {
+          "type": "string",
+          "default": "auto",
+          "description": "Idioma de origen del texto seleccionado.",
+          "enum": [
+            "auto",
+            "en", "fr", "de", "it", "pt", "pt-BR", "nl", "ru", "zh-CN", "zh-TW",
+            "ja", "ko", "ar", "hi", "tr", "pl", "sv", "no", "da", "fi",
+            "cs", "el", "he", "th", "vi", "id", "ms", "uk", "ro", "hu",
+            "bg", "hr", "sk", "sl", "et", "lv", "lt", "ca", "eu", "gl",
+            "af", "sq", "am", "hy", "az", "be", "bn", "bs", "eo", "fa",
+            "fil", "ga", "is", "ka", "kk", "km", "ku", "ky", "lb", "mk",
+            "mn", "mr", "ne", "pa", "sr", "sw", "ta", "te", "ur", "zu"
+          ],
+          "enumDescriptions": [
+            "Detección automática",
+            "Inglés", "Francés", "Alemán", "Italiano", "Portugués", "Portugués (Brasil)", "Neerlandés", "Ruso", "Chino (simplificado)", "Chino (tradicional)",
+            "Japonés", "Coreano", "Árabe", "Hindi", "Turco", "Polaco", "Sueco", "Noruego", "Danés", "Finlandés",
+            "Checo", "Griego", "Hebreo", "Tailandés", "Vietnamita", "Indonesio", "Malayo", "Ucraniano", "Rumano", "Húngaro",
+            "Búlgaro", "Croata", "Eslovaco", "Esloveno", "Estonio", "Letón", "Lituano", "Catalán", "Euskera", "Gallego",
+            "Afrikáans", "Albanés", "Amárico", "Armenio", "Azerbaiyano", "Bielorruso", "Bengalí", "Bosnio", "Esperanto", "Persa",
+            "Filipino", "Irlandés", "Islandés", "Georgiano", "Kazajo", "Jemer", "Kurdo", "Kirguís", "Luxemburgués", "Macedonio",
+            "Mongol", "Maratí", "Nepalí", "Panyabí", "Serbio", "Suajili", "Tamil", "Telugu", "Urdu", "Zulú"
+          ]
+        },
+        "translateSelection.smartCodeMode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Si está activado, en código solo se traduce el contenido entre comillas (\"...\", '...', `...`) y no se traducen nombres de variables, claves de objetos/tablas, ni bloques como 'variable = {...}' o 'variable = [...]'. Si está desactivado, siempre se traduce toda la selección tal cual."
+        },
+        "translateSelection.onlyMultiWordStrings": {
+          "type": "boolean",
+          "default": false,
+          "description": "Solo aplica cuando 'smartCodeMode' está activado. Si está activado, las cadenas de una sola palabra (sin espacios, ej: \"button\", \"ERROR_CODE\") no se traducen por considerarse probables identificadores. Si está desactivado (por defecto), las palabras sueltas también se traducen, ya que las claves de objetos/tablas y los identificadores de variable siguen protegidos por otros mecanismos (posición como clave, nombres sin comillas, rutas, URLs)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^2.24.0"
+  }
+}
